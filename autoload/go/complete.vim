@@ -30,11 +30,14 @@ function! s:gocodeCommand(cmd, preargs, args)
   " we might hit cache problems, as gocode doesn't handle well different
   " GOPATHS: https://github.com/nsf/gocode/issues/239
   let old_gopath = $GOPATH
+  let old_goroot = $GOROOT
   let $GOPATH = go#path#Detect()
+  let $GOROOT = go#util#env("goroot")
 
   let result = go#util#System(printf('%s %s %s %s', go#util#Shellescape(bin_path), join(a:preargs), go#util#Shellescape(a:cmd), join(a:args)))
 
   let $GOPATH = old_gopath
+  let $GOROOT = old_goroot
 
   if go#util#ShellError() != 0
     return "[\"0\", []]"
