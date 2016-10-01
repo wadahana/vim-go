@@ -12,7 +12,7 @@ setlocal formatoptions-=t
 setlocal comments=s1:/*,mb:*,ex:*/,://
 setlocal commentstring=//\ %s
 
-setlocal noexpandtab
+" setlocal noexpandtab
 
 command! -nargs=0 AsmFmt call go#asmfmt#Format()
 
